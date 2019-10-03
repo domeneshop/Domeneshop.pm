@@ -114,3 +114,70 @@ Modifies a specific DNS record for a domain.
 ### `Domeneshop->dns->delete_record(domain_id, record_id)`
 
 Deletes a specific DNS record for a domain.
+
+### `Domeneshop->forwards`
+
+This namespace contains all methods to manipulate http 301 forwarding for host names on domains.
+
+### `Domeneshop->forwards->get_forward(domain_id, host)`
+
+Get a specific forwarding for a host name.
+
+**Note:**: The host field does not include the domain name. A forwarding for `www.example.com` should only have `www` in its host field.
+
+#### Returns:
+```json
+{
+    "host": "www",
+    "frame": false,
+    "url": "http://example.com/"
+}
+```
+
+### `Domeneshop->forwards->get_forwards(domain_id)`
+
+List all forwardings for a domain.
+
+### `Domeneshop->forwards->create_forward(domain_id, forward)`
+
+Creates a new forwarding for a host name on a domain. The record format is JSON with required parameters like the one returned from **getForward**.
+
+### `Domeneshop->forwards->modify_forward(domain_id, host, forward)`
+
+Modifies a specific forwardings for a host name on a domain.
+
+**Note:** You can't modify the host field. If you want to modify this field, delete the existing forwarding and recreate it.
+
+### `Domeneshop->forwards->delete_forward(domain_id, host)`
+
+Deletes a specific forwarding for a host name on a domain.
+
+
+### `Domeneshop->invoices`
+
+This namespace contains all methods to read invoice information on an account.
+
+### `Domeneshop->invoices->get_invoice(invoice_id)`
+
+Get one invoice.
+
+#### Returns:
+```json
+{
+    "amount": 120,
+    "currency": "NOK",
+    "due_date": "2097-11-14",
+    "id": 1,
+    "issued_date": "2097-10-30",
+    "paid_date": "2098-11-10",
+    "status": "paid",
+    "type": "invoice",
+    "url": "https://domene.shop/invoice?nr=1"
+}
+```
+
+### `Domeneshop->invoices->get_invoices(status)`
+
+List all invoices for an account. Might be filtered by `status`.
+
+`status` is optional, and might be one of "paid", "unpaid" or "settled". "settled" means the invoice is settled by a credit note.

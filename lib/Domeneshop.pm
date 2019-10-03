@@ -8,6 +8,9 @@ our $VERSION = 0.1;
 
 use Domeneshop::API;
 use Domeneshop::DNS;
+use Domeneshop::Forwards;
+use Domeneshop::Invoices;
+
 
 sub new
 {
@@ -17,13 +20,25 @@ sub new
 
     return bless {
         api => $api,
-        dns => new Domeneshop::DNS($api)
+        dns => new Domeneshop::DNS($api),
+        forwards => new Domeneshop::Forwards($api),
+        invoices => new Domeneshop::Invoices($api)
     }, $class;
 }
 
 sub dns {
     my ($self) = @_;
     return $self->{dns};
+}
+
+sub forwards {
+    my ($self) = @_;
+    return $self->{forwards};
+}
+
+sub invoices {
+    my ($self) = @_;
+    return $self->{invoices};
 }
 
 sub get_domains {

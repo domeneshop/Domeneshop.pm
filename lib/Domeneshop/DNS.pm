@@ -62,6 +62,8 @@ sub _validate {
         'AAAA'  => [],
         'CNAME' => [],
         'ANAME' => [],
+        'NS'    => [],
+        'TXT'   => [],
         'MX'    => ['priority'],
         'SRV'   => ['priority', 'weight', 'port'],
         'TLSA'  => ['usage', 'selector', 'dtype'],
